@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 const statusStyles = {
   New: "bg-blue-100 text-blue-700",
@@ -9,6 +10,7 @@ const statusStyles = {
 };
 
 export default function AdminPage() {
+  const router = useRouter();
   const [leads, setLeads] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
@@ -78,12 +80,26 @@ export default function AdminPage() {
     }
   }
 
+  async function handleLogout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    router.push("/login");
+    router.refresh();
+  }
+
   return (
     <main className="min-h-screen bg-gray-50 px-4 py-10">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-2xl font-semibold text-gray-900 mb-1">
-          Leads Admin
-        </h1>
+        <div className="flex items-center justify-between mb-1">
+          <h1 className="text-2xl font-semibold text-gray-900">
+            Leads Admin
+          </h1>
+          <button
+            onClick={handleLogout}
+            className="text-sm text-gray-600 hover:text-gray-900 underline"
+          >
+            Log out
+          </button>
+        </div>
         <p className="text-gray-500 mb-6">
           {leads.length} lead{leads.length !== 1 ? "s" : ""} found
         </p>
