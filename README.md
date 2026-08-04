@@ -9,7 +9,7 @@ A small full-stack lead-capture tool built for the Digital Heroes Full Stack Dev
 ## Test credentials
 
 - **Username:** admin
-- **Password:** (shared separately with the reviewer / see submission notes)
+- **Password:** mina2005!
 
 ## What it does
 
